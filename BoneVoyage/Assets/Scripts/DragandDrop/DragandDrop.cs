@@ -3,8 +3,7 @@ using UnityEngine;
 public class DragAndDrop : MonoBehaviour
 {
     public string cubeType;         // Ejemplo: "Rojo", "Azul", etc.
-    public Vector3 initialPosition; // Guarda la posici�n original
-
+    public Vector3 initialPosition; // Guarda la posición original
     private Vector3 offset;
     private float zCoord;
     private bool locked = false;    // Indica si el objeto ya fue colocado correctamente
@@ -16,8 +15,7 @@ public class DragAndDrop : MonoBehaviour
 
     private void OnMouseDown()
     {
-        if (locked)
-            return;
+        if (locked) return;
 
         zCoord = Camera.main.WorldToScreenPoint(transform.position).z;
         offset = transform.position - GetMouseWorldPos();
@@ -25,12 +23,14 @@ public class DragAndDrop : MonoBehaviour
 
     private void OnMouseDrag()
     {
-        if (locked)
-            return;
+        if (locked) return;
 
         Vector3 newPosition = GetMouseWorldPos() + offset;
+
+        // Limitar la posición Y para evitar traspasar el suelo (suelo en Y=0)
         if (newPosition.y < 0.5f)
             newPosition.y = 0.5f;
+
         transform.position = newPosition;
     }
 
@@ -55,5 +55,11 @@ public class DragAndDrop : MonoBehaviour
             rb.useGravity = false;
             rb.constraints = RigidbodyConstraints.FreezeAll;
         }
+    }
+
+    // Método que devuelve el cubo a su posición inicial
+    public void ReturnToInitialPosition()
+    {
+        transform.position = initialPosition;
     }
 }
