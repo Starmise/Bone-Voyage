@@ -14,8 +14,12 @@ TagManager:
   - Water
   - UI
   - Obstacle
+<<<<<<< Updated upstream
   - Goal
   - Ground
+=======
+  - NoCollision
+>>>>>>> Stashed changes
   - 
   - 
   - 
@@ -42,6 +46,9 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: NoCollision
+    uniqueID: 2433641307
     locked: 0
   m_RenderingLayers:
   - Default
